@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome To AWS!{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/styles/landing.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="landing-page">
+        <header>
+            <div class="container">
+                <a href="#" class="logo">Welcome to <b>AnonForums</b> stranger!</a>
+                <ul class="links">
+                    <li onclick="window.location.href = '/'">Home</li>
+                    <li onclick="window.location.href = '/topic/create'">New Topic</li>
+                    <li onclick="window.location.href = '/feed'">Feed</li>
+                    <li onclick="window.location.href = '/edit'">My data</li>
+                    <li onclick="window.location.href = '/logout'">Logout</li>
+                </ul>
+            </div>
+        </header>
+        <div class="content">
+            <div class="container">
+                <form action="" method="POST" class="edit-form">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" value="{{ app.user.firstName }}">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" value="{{ app.user.lastName }}">
+                    <label for="sex">Sex</label>
+                    <input type="text" id="sex" name="sex" value="{{ app.user.sex }}">
+                    <div class="info">
+                        <button type="submit">Send</button>
+                    </div>
+                </form>
+                <div class="image">
+                    <img src="https://i.postimg.cc/65QxYYzh/001234.png">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

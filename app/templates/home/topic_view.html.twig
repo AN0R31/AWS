@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ topic.title }} - AnnonForums{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/styles/landing.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="landing-page">
+        <header>
+            <div class="container">
+                <a href="#" class="logo">Welcome to <b>AnonForums</b> stranger!</a>
+                <ul class="links">
+                    <li onclick="window.location.href = '/'">Home</li>
+                    <li onclick="window.location.href = '/topic/create'">New Topic</li>
+                    <li onclick="window.location.href = '/feed'">Feed</li>
+                    <li onclick="window.location.href = '/edit'">My data</li>
+                    <li onclick="window.location.href = '/logout'">Logout</li>
+                </ul>
+            </div>
+        </header>
+        <div class="topic">
+            <div class="container">
+                <h1>{{ topic.title }} - {{ topic.createdAt|ago }}</h1>
+                <h2>{{ topic.description }}</h2>
+                <img class="topic-image" src="{{ topic.imageUrl }}">
+
+                <form action="" method="POST" class="edit-form">
+                    <label for="comment">Leave Comment:</label>
+                    <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+                    <div class="content">
+                        <div class="info">
+                            <button type="submit">Send</button>
+                        </div>
+                    </div>
+                </form>
+
+                {% for comment in comments %}
+                    <h2>{{ comment.text }}</h2>
+                    <h3>by {{ comment.owner.firstName }} {{ comment.createdAt|ago }}</h3>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

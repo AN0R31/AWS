@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome To AWS!{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/styles/landing.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <!-- Start Landing Page -->
+    <div class="landing-page">
+        <header>
+            <div class="container">
+                <a href="#" class="logo">Welcome to <b>AnonForums</b> stranger!</a>
+                <ul class="links">
+                    <li onclick="window.location.href = '/'">Home</li>
+                    <li onclick="window.location.href = '/topic/create'">New Topic</li>
+                    <li onclick="window.location.href = '/feed'">Feed</li>
+                    <li onclick="window.location.href = '/edit'">My data</li>
+                    <li onclick="window.location.href = '/logout'">Logout</li>
+                </ul>
+            </div>
+        </header>
+        <div class="content">
+            <div class="container">
+                <div class="info">
+                    <h1>{{ app.user.firstName }}'s PANEL</h1>
+                    <p>Welcome back <b>{{ app.user.firstName }} {{ app.user.lastName }}</b>.
+                    You are logged in as {{ app.user.email }}.
+                </div>
+                <div class="image">
+                    <img src="https://i.postimg.cc/65QxYYzh/001234.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Landing Page -->
+{% endblock %}

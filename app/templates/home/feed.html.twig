@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My feed - AnnonForums{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/styles/landing.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <!-- Start Landing Page -->
+    <div class="landing-page">
+        <header>
+            <div class="container">
+                <a href="#" class="logo">Welcome to <b>AnonForums</b> stranger!</a>
+                <ul class="links">
+                    <li onclick="window.location.href = '/'">Home</li>
+                    <li onclick="window.location.href = '/topic/create'">New Topic</li>
+                    <li onclick="window.location.href = '/feed'">Feed</li>
+                    <li onclick="window.location.href = '/edit'">My data</li>
+                    <li onclick="window.location.href = '/logout'">Logout</li>
+                </ul>
+            </div>
+        </header>
+        <div class="topic">
+            <div class="container">
+                {% for topic in topics|reverse|slice(0, 10) %}
+                <div onclick="window.location.href = '/topic/{{ topic.id }}'" style="cursor: pointer;" class="hoverPurple">
+                    <h1>{{ topic.title }} - {{ topic.createdAt|ago }}</h1>
+                    <h2>{{ topic.description }}</h2>
+                </div>
+                    --------------------------------------------------------------------------------------
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- End Landing Page -->
+{% endblock %}
