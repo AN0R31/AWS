@@ -1,0 +1,39 @@
+#Options All -Indexes
+#
+#DirectoryIndex index.php index.htm index.html
+#
+#Options +FollowSymLinks -MultiViews
+#
+#RewriteEngine on
+#RewriteBase /
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !^/public
+RewriteRule ^(.*)$ /public/$1 [L,R=301]
+
+#RewriteCond %{HTTP_HOST} ^(www\.)?accfns\.com [NC]
+#RewriteRule (.*) https://www.accfns.com/$1 [R=301,L]
+
+#RewriteCond %{REQUEST_URI} !^/app/public
+#RewriteRule ^(.*)$ /app/public/index.php/$1 [L,R=301]
+
+#RewriteCond %{HTTP_HOST} ^accfns.com$ [NC,OR]
+#RewriteCond %{HTTP_HOST} ^www.accfns.com$
+#RewriteCond %{REQUEST_URI} !app/public/
+#RewriteRule (.*) /app/public/$1 [L]
+
+#RewriteCond %{HTTP_HOST} ^accfns\.com$
+#RewriteRule (.*) http://www.accfns.com/$1 [R=301,L]
+#RewriteRule ^$ /app/public/index.php [L]
+
+# Force HTTPS on the subdomains/subdirectories login or admin
+#RewriteCond %{HTTPS} off
+#RewriteCond %{HTTP_HOST} ^(login|admin)\. [NC]
+#RewriteCond %{REQUEST_URI} ^(login|admin)\. [NC,OR]
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Force WWW if no subdomain is given
+#RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]+$
+#RewriteCond %{HTTP_HOST} !^$
+#RewriteCond %{HTTPS}s ^on(s)|
+#RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]

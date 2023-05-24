@@ -45,34 +45,21 @@ class TopicController extends AbstractController
             return $this->redirectToRoute('app_landing');
         }
 
-        $image = $request->files->get('image');
-        $extension = explode('.', $image->getClientOriginalName());
-        $extension = end($extension);
-        $fileName = $this->getUser()->getId() . $this->getUser()->getfirstName() . '.' .  $extension;
-        $image->move($kernel->getProjectDir() . '/public/assets/images/temp', $fileName);
-
-        $s3 = new S3Client([
-            'region'  => 'eu-north-1',
-            'version' => 'latest',
-            'credentials' => [
-                'key'    => "AKIAQLE734WSU6D7PZ4O",
-                'secret' => "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",
-            ]
-        ]);
-
-//        $sha256 = hash_file("sha256", $kernel->getProjectDir() . '/public/assets/images/temp/' . $fileName);
-        $result = $s3->putObject([
-            'Bucket' => 'awsprojectnicolescuandreibucket',
-            'Key'    => $fileName,
-            'SourceFile' => $kernel->getProjectDir() . '/public/assets/images/temp/'. $fileName, $fileName,
-//            "ContentSHA256" => $sha256,
-        ]);
-
         $topic = new Topic();
+        $topic->setImageUrl(null);
+
+        if ($request->files->get('image') !== null) {
+            $image = $request->files->get('image');
+            $extension = explode('.', $image->getClientOriginalName());
+            $extension = end($extension);
+            $fileName = $this->getUser()->getId() . $this->getUser()->getfirstName() . $image->getClientOriginalName() . '.' .  $extension;
+            $image->move($kernel->getProjectDir() . '/public/assets/images/temp', $fileName);
+            $topic->setImageUrl('/assets/images/temp/' . $fileName);
+        }
+
         $topic->setTitle($request->request->get('title'));
         $topic->setDescription($request->request->get('description'));
         $topic->setCreatedAt(new \DateTimeImmutable());
-        $topic->setImageUrl('https://awsprojectnicolescuandreibucket.s3.eu-north-1.amazonaws.com/' . $fileName);
         $topic->setOwner($this->getUser());
 
         $entityManager->persist($topic);

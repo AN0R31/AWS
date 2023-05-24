@@ -171,7 +171,8 @@ label {
 }
 
 .hoverPurple {
-
+    transition: color;
+    transition-duration: 0.2s;
 }
 
 .hoverPurple:hover {

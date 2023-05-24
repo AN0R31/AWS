@@ -47,8 +47,7 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setIsCompleted(false);
-            $user->setRdsId(0);
-
+            
             $entityManager->persist($user);
             $entityManager->flush();
 

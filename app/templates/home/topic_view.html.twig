@@ -24,6 +24,7 @@
             <div class="container">
                 <h1>{{ topic.title }} - {{ topic.createdAt|ago }}</h1>
                 <h2>{{ topic.description }}</h2>
+                <h5>by {{ topic.owner.firstName }}</h5>
                 <img class="topic-image" src="{{ topic.imageUrl }}">
 
                 <form action="" method="POST" class="edit-form">
